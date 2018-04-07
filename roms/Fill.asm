@@ -27,6 +27,9 @@
     // save keyboard input pressed.
     @KBD
     D = M
+    @pressed
+    M = D
+
     @FILLSCREEN // If any key pressed, go to fillscreen
     D;JGT
 
@@ -35,6 +38,14 @@
     M = 0
 
 (FILLSCREEN)
+    // Check if the key pressed changed.
+    @KBD
+    D = M
+    @pressed
+    D = D - M
+    @LOOP
+    D;JNE
+
     // Check if i - [screen addr] equals to 0. If so, all pixels are filled.
     @addr
     D = M
